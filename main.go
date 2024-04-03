@@ -6,6 +6,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"usermanagement.com/database"
+	"usermanagement.com/handlers"
 )
 
 func main() {
@@ -15,6 +16,13 @@ func main() {
 
 	// Initialize router
 	router := mux.NewRouter()
+
+	// Define API endpoints
+	router.HandleFunc("/signup", handlers.SignUpHandler).Methods("POST")
+	router.HandleFunc("/generate-invite-code", handlers.GenerateInvitationCodeHandler).Methods("POST")
+	router.HandleFunc("/signin", handlers.SignInHandler).Methods("POST")
+	router.HandleFunc("/user/delete", handlers.DeleteUserHandler).Methods("DELETE")
+	router.HandleFunc("/user/update", handlers.UpdateUserHandler).Methods("PUT")
 
 	// Start server
 	fmt.Println("Server running on port 8080")
