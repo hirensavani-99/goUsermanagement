@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	// Initialize database
+
 	database.InitDB()
 	defer database.Db.Close()
 
@@ -23,6 +23,11 @@ func main() {
 	router.HandleFunc("/signin", handlers.SignInHandler).Methods("POST")
 	router.HandleFunc("/user/delete", handlers.DeleteUserHandler).Methods("DELETE")
 	router.HandleFunc("/user/update", handlers.UpdateUserHandler).Methods("PUT")
+
+	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("There we are !")
+		fmt.Fprintf(w, "Hello, welcome to the greeting endpoint!")
+	}).Methods("GET")
 
 	// Start server
 	fmt.Println("Server running on port 8080")

@@ -22,17 +22,19 @@ type InvitationCode struct {
 }
 
 const (
-	Host     = "localhost"
+	Host     = "usermanagement1.postgres.database.azure.com"
 	Port     = "5432"
-	UserName = "root"
-	DBName   = "User_Management"
-	Password = "Hiren123"
+	UserName = "hiren"
+	DBName   = "postgres"
+	Password = "H!ren99096"
 )
 
 func InitDB() {
-	connectionString := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=disable", Host, Port, UserName, DBName, Password)
+
+	connectionString := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=require", Host, Port, UserName, DBName, Password)
 	var err error
 	Db, err = gorm.Open("postgres", connectionString)
+	fmt.Print("ds")
 	if err != nil {
 		panic("failed to connect database")
 	}

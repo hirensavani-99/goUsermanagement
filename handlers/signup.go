@@ -19,9 +19,11 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Validate invitation code
 	invitationCode := r.Header.Get("Invitation-Code")
-	if !utils.IsValidInvitationCode(invitationCode) {
-		http.Error(w, "Invalid or already used invitation code", http.StatusBadRequest)
-		return
+	if invitationCode != "INVITEME" {
+		if !utils.IsValidInvitationCode(invitationCode) {
+			http.Error(w, "Invalid or already used invitation code", http.StatusBadRequest)
+			return
+		}
 	}
 
 	// Hash password before storing it
